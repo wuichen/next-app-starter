@@ -23,8 +23,8 @@ export default function Index() {
               Next.js App Starter!
             </a>
           </h1>
-          <input onChange={(e)=>setEmail(e.target.value)} type="text" />
-          <button onClick={()=> signIn("email",{email})}>login</button>
+          <input onChange={(e)=>{setEmail(e.target.value)}} type="text" />
+          <button onClick={()=> {signIn("email",{email})}}>login</button>
           <p className={styles.description}>
             Get started by editing{" "}
             <code className={styles.code}>pages/index.tsx</code>
