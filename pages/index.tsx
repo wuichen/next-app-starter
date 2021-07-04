@@ -24,7 +24,7 @@ export default function Index() {
             </a>
           </h1>
           <input onChange={(e)=>{setEmail(e.target.value)}} type="text" />
-          <button onClick={()=> {signIn("email",{email})}}>login</button>
+          <button type="button" onClick={()=> {signIn("email",{email})}}>login</button>
           <p className={styles.description}>
             Get started by editing{" "}
             <code className={styles.code}>pages/index.tsx</code>
