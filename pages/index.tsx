@@ -1,12 +1,13 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { getSession } from "next-auth/client";
-
+import { getSession, signIn } from "next-auth/client";
+import {useState} from "react";
 import Layout from "../components/Layout";
 import styles from "../styles/Home.module.css";
 import Counter from "../components/Counter";
 
 export default function Index() {
+  const [email, setEmail] = useState("")
   return (
     <Layout>
       <div className={styles.container}>
@@ -22,7 +23,8 @@ export default function Index() {
               Next.js App Starter!
             </a>
           </h1>
-
+          <input onChange={(e)=>setEmail(e.target.value)} type="text" />
+          <button onClick={()=> signIn("email",{email})}>login</button>
           <p className={styles.description}>
             Get started by editing{" "}
             <code className={styles.code}>pages/index.tsx</code>
