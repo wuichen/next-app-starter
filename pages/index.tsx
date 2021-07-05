@@ -1,13 +1,14 @@
-import { GetServerSideProps } from "next";
-import Head from "next/head";
-import { getSession, signIn } from "next-auth/client";
-import {useState} from "react";
-import Layout from "../components/Layout";
-import styles from "../styles/Home.module.css";
-import Counter from "../components/Counter";
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+import { getSession, signIn } from 'next-auth/client';
+import { useState } from 'react';
+import Layout from '../components/Layout';
+import styles from '../styles/Home.module.css';
+import Counter from '../components/Counter';
 
-export default function Index() {
-  const [email, setEmail] = useState("")
+export default function Index({ session }) {
+  const [email, setEmail] = useState('');
+  console.log(session);
   return (
     <Layout>
       <div className={styles.container}>
@@ -18,16 +19,24 @@ export default function Index() {
 
         <main className={styles.main}>
           <h1 className={styles.title}>
-            Welcome to{" "}
-            <a href="https://github.com/jellydn/next-app-starter">
-              Next.js App Starter!
-            </a>
+            Welcome to <a href="https://github.com/jellydn/next-app-starter">Next.js App Starter!</a>
           </h1>
-          <input onChange={(e)=>{setEmail(e.target.value)}} type="text" />
-          <button type="button" onClick={()=> {signIn("email",{email})}}>login</button>
+          <input
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            type="text"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              signIn('email', { email, callbackUrl: window.location.href });
+            }}
+          >
+            login
+          </button>
           <p className={styles.description}>
-            Get started by editing{" "}
-            <code className={styles.code}>pages/index.tsx</code>
+            Get started by editing <code className={styles.code}>pages/index.tsx</code>
           </p>
           <Counter />
 
@@ -39,15 +48,10 @@ export default function Index() {
 
             <a href="https://tailwindcss.com/" className={styles.card}>
               <h3>Tailwind CSS</h3>
-              <p>
-                Rapidly build modern websites without ever leaving your HTML.
-              </p>
+              <p>Rapidly build modern websites without ever leaving your HTML.</p>
             </a>
 
-            <a
-              href="https://docs.pmnd.rs/jotai/introduction"
-              className={styles.card}
-            >
+            <a href="https://docs.pmnd.rs/jotai/introduction" className={styles.card}>
               <h3>Jotai</h3>
               <p>👻 Primitive and flexible state management for React.</p>
             </a>
@@ -59,18 +63,12 @@ export default function Index() {
 
             <a href="https://www.react-hook-form.com/" className={styles.card}>
               <h3>React Hook Form</h3>
-              <p>
-                Performance, flexible and extensible forms with easy-to-use
-                validation.
-              </p>
+              <p>Performance, flexible and extensible forms with easy-to-use validation.</p>
             </a>
 
             <a href="https://testing-library.com/" className={styles.card}>
               <h3>React Testing Library</h3>
-              <p>
-                Simple and complete testing utilities that encourage good
-                testing practices .
-              </p>
+              <p>Simple and complete testing utilities that encourage good testing practices .</p>
             </a>
 
             <a href="https://react-query.tanstack.com/" className={styles.card}>
@@ -91,17 +89,8 @@ export default function Index() {
         </main>
 
         <footer className={styles.footer}>
-          <a
-            href="https://productsway.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by{" "}
-            <img
-              src="/logo.svg"
-              alt="ProductsWay Logo"
-              className={styles.logo}
-            />
+          <a href="https://productsway.com" target="_blank" rel="noopener noreferrer">
+            Powered by <img src="/logo.svg" alt="ProductsWay Logo" className={styles.logo} />
           </a>
           <a
             className="pl-2"
