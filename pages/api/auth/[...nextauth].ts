@@ -32,7 +32,10 @@ export default NextAuth({
     },
   }),
   callbacks: {
-    redirect: async (url, baseUrl) => Promise.resolve(url),
+    redirect: async (url, baseUrl) => {
+      console.log(url, baseUrl, "url and baseUrl")
+      return Promise.resolve(url)
+    },
     session: async (session, user) => Promise.resolve({ ...session, id: user.id }),
   }
 });
