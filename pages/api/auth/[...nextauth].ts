@@ -10,6 +10,15 @@ export default NextAuth({
     Providers.Email({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
+      // server: {
+      //   host: process.env.EMAIL_SERVER_HOST,
+      //   port: process.env.EMAIL_SERVER_PORT,
+      //   auth: {
+      //     user: process.env.EMAIL_SERVER_USER,
+      //     pass: process.env.EMAIL_SERVER_PASSWORD
+      //   }
+      // },
+      // from: process.env.EMAIL_FROM
     }),
   ],
   database: process.env.DATABASE_URL,
@@ -22,4 +31,11 @@ export default NextAuth({
       VerificationRequest: "verificationRequest",
     },
   }),
+  callbacks: {
+    redirect: async (url, baseUrl) => Promise.resolve(url),
+    session: async (session, user) => {
+      session.id = user.id;
+      return Promise.resolve(session);
+    },
+  }
 });
