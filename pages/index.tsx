@@ -30,6 +30,7 @@ export default function Index({ session }) {
           <button
             type="button"
             onClick={() => {
+              alert(window.location.href)
               signIn('email', { email, callbackUrl: window.location.href });
             }}
           >
